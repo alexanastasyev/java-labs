@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Design your program</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+
+<form method="POST" th:object="${program}">
+
+    <div>
+        <h3>ENGLISH</h3>
+        <div th:each="course: ${english}">
+            <input name="courses" type="checkbox" th:value="${course.id}">
+            <span th:text="${course.title}">COURSE</span>
+        </div>
+    </div>
+    <div>
+        <h3>GERMAN</h3>
+        <div th:each="course: ${german}">
+            <input name="courses" type="checkbox" th:value="${course.id}">
+            <span th:text="${course.title}">COURSE</span>
+        </div>
+    </div>
+    <div>
+        <h3>FRENCH</h3>
+        <div th:each="course: ${french}">
+            <input name="courses" type="checkbox" th:value="${course.id}">
+            <span th:text="${course.title}">COURSE</span>
+        </div>
+    </div>
+
+    <h3>Name your individual program:</h3>
+    <input type="text" th:field="*{title}"/>
+
+    <span th:text="${#fields.hasErrors('title')}">XXX</span>
+    <span class="validationError"
+          th:if="${#fields.hasErrors('title')}"
+          th:errors="*{title}">Name Error</span>
+
+    <br/><br/>
+    <button>Submit</button>
+</form>
+</body>
+</html>
