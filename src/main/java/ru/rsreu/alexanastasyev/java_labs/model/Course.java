@@ -1,4 +1,4 @@
-package ru.rsreu.alexanastasyev.java_labs.domain;
+package ru.rsreu.alexanastasyev.java_labs.model;
 
 import lombok.Data;
 

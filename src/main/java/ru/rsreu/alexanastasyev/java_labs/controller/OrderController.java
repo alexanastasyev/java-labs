@@ -8,19 +8,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.rsreu.alexanastasyev.java_labs.domain.Course;
-import ru.rsreu.alexanastasyev.java_labs.domain.Language;
-import ru.rsreu.alexanastasyev.java_labs.domain.Program;
+import ru.rsreu.alexanastasyev.java_labs.model.Course;
+import ru.rsreu.alexanastasyev.java_labs.model.Language;
+import ru.rsreu.alexanastasyev.java_labs.model.Order;
 
 import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
-@RequestMapping("/design")
-public class DesignController {
+@RequestMapping("/order")
+public class OrderController {
 
     @ModelAttribute
     public void addCoursesToModel(Model model) {
@@ -36,24 +35,26 @@ public class DesignController {
             new Course("FRVO", "French vocabulary", Language.FRENCH)
         );
 
-        Language[] languages = Language.values();
-        for (Language language : languages) {
-            model.addAttribute(
-                    language.toString().toLowerCase(),
-                    courses.stream().filter(course -> course.getLanguage().equals(language)).collect(Collectors.toList()));
-        }
+        model.addAttribute("courses", courses);
+
+//        Language[] languages = Language.values();
+//        for (Language language : languages) {
+//            model.addAttribute(
+//                    language.toString().toLowerCase(),
+//                    courses.stream().filter(course -> course.getLanguage().equals(language)).collect(Collectors.toList()));
+//        }
     }
 
     @GetMapping
-    public String showDesignForm(Model model) {
-        model.addAttribute("program", new Program());
-        return "design";
+    public String showOrderForm(Model model) {
+        model.addAttribute("order", new Order());
+        return "order";
     }
 
     @PostMapping
-    public String processDesign(@Valid @ModelAttribute("program") Program program, Errors errors, Model model) {
+    public String processOrder(@Valid @ModelAttribute("order") Order order, Errors errors, Model model) {
         if (errors.hasErrors()) {
-            return "design";
+            return "order";
         }
         return "redirect:/";
     }
