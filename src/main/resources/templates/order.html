@@ -8,60 +8,67 @@
     <link th:rel="stylesheet" th:href="@{/styles.css}"/>
 </head>
 <body>
-<div class="main-container">
-    <form method="POST" th:object="${order}">
-        <div class="mb-3">
-            <label class="form-label">Course:
-                <span class="validationError"
-                      th:if="${#fields.hasErrors('course')}"
-                      th:errors="*{course}">Error</span>
-            </label>
-            <select th:field="*{course}" class="form-select">
-                <option th:each="course : ${courses}"
-                        th:text="${course.title}"
-                        th:value="${course.title}">Course name
-                </option>
-            </select>
+<div class="main-container container">
+    <div class="row">
+        <div class="col-4">
+            <!--suppress HtmlRequiredAltAttribute, RequiredAttributes -->
+            <img th:src="@{images/order_image.jpg}" height="600">
         </div>
+        <form method="POST" th:object="${order}" class="col-8">
+            <div class="mb-3">
+                <label class="form-label">Course:
+                    <span class="validationError"
+                          th:if="${#fields.hasErrors('course')}"
+                          th:errors="*{course}">Error</span>
+                </label>
+                <select th:field="*{course}" class="form-select">
+                    <option th:each="course : ${courses}"
+                            th:text="${course.title}"
+                            th:value="${course.title}">Course name
+                    </option>
+                </select>
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">Your name:
-                <span class="validationError"
-                      th:if="${#fields.hasErrors('userName')}"
-                      th:errors="*{userName}">Error</span>
-            </label>
-            <input type="text" th:field="*{userName}" placeholder="Ivanov Ivan" class="form-control"/>
-        </div>
+            <div class="mb-3">
+                <label class="form-label">Your name:
+                    <span class="validationError"
+                          th:if="${#fields.hasErrors('userName')}"
+                          th:errors="*{userName}">Error</span>
+                </label>
+                <input type="text" th:field="*{userName}" placeholder="Ivanov Ivan" class="form-control"/>
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">Credit card number:
-                <span class="validationError"
-                      th:if="${#fields.hasErrors('creditCardNumber')}"
-                      th:errors="*{creditCardNumber}">Error</span>
-            </label>
-            <input type="text" th:field="*{creditCardNumber}" placeholder="1234 5678 9012 3456" class="form-control"/>
-        </div>
+            <div class="mb-3">
+                <label class="form-label">Credit card number:
+                    <span class="validationError"
+                          th:if="${#fields.hasErrors('creditCardNumber')}"
+                          th:errors="*{creditCardNumber}">Error</span>
+                </label>
+                <input type="text" th:field="*{creditCardNumber}" placeholder="1234 5678 9012 3456"
+                       class="form-control"/>
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">Expiration date:
-                <span class="validationError"
-                      th:if="${#fields.hasErrors('creditCardExpiration')}"
-                      th:errors="*{creditCardExpiration}">Error</span>
-            </label>
-            <input type="text" th:field="*{creditCardExpiration}" placeholder="01/22" class="form-control"/>
-        </div>
+            <div class="mb-3">
+                <label class="form-label">Expiration date:
+                    <span class="validationError"
+                          th:if="${#fields.hasErrors('creditCardExpiration')}"
+                          th:errors="*{creditCardExpiration}">Error</span>
+                </label>
+                <input type="text" th:field="*{creditCardExpiration}" placeholder="01/22" class="form-control"/>
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">CVV:
-                <span class="validationError"
-                      th:if="${#fields.hasErrors('creditCardCVV')}"
-                      th:errors="*{creditCardCVV}">Error</span>
-            </label>
-            <input type="text" th:field="*{creditCardCVV}" placeholder="123" class="form-control"/>
-        </div>
+            <div class="mb-3">
+                <label class="form-label">CVV:
+                    <span class="validationError"
+                          th:if="${#fields.hasErrors('creditCardCVV')}"
+                          th:errors="*{creditCardCVV}">Error</span>
+                </label>
+                <input type="text" th:field="*{creditCardCVV}" placeholder="123" class="form-control"/>
+            </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 </div>
 </body>
 </html>
