@@ -2,12 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>English courses</title>
+    <title>Languages school</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/styles.css}"/>
 </head>
 <body>
-    <h1>Welcome to our English language school!</h1>
+<div class="main-container">
+    <h1>Welcome to our languages school!</h1>
+    <br/>
+    <!--suppress HtmlRequiredAltAttribute, RequiredAttributes -->
     <img th:src="@{images/logo.jpg}" width="600"/>
-
-    <a th:href="@{/order}">Enroll now!</a>
+    <br/><br/>
+    <a th:href="@{/order}" class="btn btn-primary">Enroll now</a>
+</div>
 </body>
 </html>

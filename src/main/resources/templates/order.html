@@ -3,60 +3,65 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Design your program</title>
-    <link rel="stylesheet" th:href="@{/styles.css}"/>
+    <title>Enroll now</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/styles.css}"/>
 </head>
 <body>
+<div class="main-container">
+    <form method="POST" th:object="${order}">
+        <div class="mb-3">
+            <label class="form-label">Course:
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('course')}"
+                      th:errors="*{course}">Error</span>
+            </label>
+            <select th:field="*{course}" class="form-select">
+                <option th:each="course : ${courses}"
+                        th:text="${course.title}"
+                        th:value="${course.title}">Course name
+                </option>
+            </select>
+        </div>
 
-<form method="POST" th:object="${order}">
+        <div class="mb-3">
+            <label class="form-label">Your name:
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('userName')}"
+                      th:errors="*{userName}">Error</span>
+            </label>
+            <input type="text" th:field="*{userName}" placeholder="Ivanov Ivan" class="form-control"/>
+        </div>
 
-    <div>
-        <label>Course: </label>
-        <select th:field="*{course}">
-            <option th:each="course : ${courses}"
-                    th:text="${course.title}"
-                    th:value="${course.title}">Course name
-            </option>
-        </select>
-        <span class="validationError"
-              th:if="${#fields.hasErrors('course')}"
-              th:errors="*{course}">Error</span>
-    </div>
+        <div class="mb-3">
+            <label class="form-label">Credit card number:
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('creditCardNumber')}"
+                      th:errors="*{creditCardNumber}">Error</span>
+            </label>
+            <input type="text" th:field="*{creditCardNumber}" placeholder="1234 5678 9012 3456" class="form-control"/>
+        </div>
 
-    <div>
-        <label>Your name: </label>
-        <input type="text" th:field="*{userName}"/>
-        <span class="validationError"
-              th:if="${#fields.hasErrors('userName')}"
-              th:errors="*{userName}">Error</span>
-    </div>
+        <div class="mb-3">
+            <label class="form-label">Expiration date:
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('creditCardExpiration')}"
+                      th:errors="*{creditCardExpiration}">Error</span>
+            </label>
+            <input type="text" th:field="*{creditCardExpiration}" placeholder="01/22" class="form-control"/>
+        </div>
 
-    <div>
-        <label>Credit card number: </label>
-        <input type="text" th:field="*{creditCardNumber}"/>
-        <span class="validationError"
-              th:if="${#fields.hasErrors('creditCardNumber')}"
-              th:errors="*{creditCardNumber}">Error</span>
-    </div>
+        <div class="mb-3">
+            <label class="form-label">CVV:
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('creditCardCVV')}"
+                      th:errors="*{creditCardCVV}">Error</span>
+            </label>
+            <input type="text" th:field="*{creditCardCVV}" placeholder="123" class="form-control"/>
+        </div>
 
-    <div>
-        <label>Expiration date: </label>
-        <input type="text" th:field="*{creditCardExpiration}"/>
-        <span class="validationError"
-              th:if="${#fields.hasErrors('creditCardExpiration')}"
-              th:errors="*{creditCardExpiration}">Error</span>
-    </div>
-
-    <div>
-        <label>CVV: </label>
-        <input type="text" th:field="*{creditCardCVV}"/>
-        <span class="validationError"
-              th:if="${#fields.hasErrors('creditCardCVV')}"
-              th:errors="*{creditCardCVV}">Error</span>
-    </div>
-
-    <br/><br/>
-    <button>Submit</button>
-</form>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
 </body>
 </html>

@@ -34,15 +34,7 @@ public class OrderController {
             new Course("FRGR", "French grammar", Language.FRENCH),
             new Course("FRVO", "French vocabulary", Language.FRENCH)
         );
-
         model.addAttribute("courses", courses);
-
-//        Language[] languages = Language.values();
-//        for (Language language : languages) {
-//            model.addAttribute(
-//                    language.toString().toLowerCase(),
-//                    courses.stream().filter(course -> course.getLanguage().equals(language)).collect(Collectors.toList()));
-//        }
     }
 
     @GetMapping
@@ -52,7 +44,7 @@ public class OrderController {
     }
 
     @PostMapping
-    public String processOrder(@Valid @ModelAttribute("order") Order order, Errors errors, Model model) {
+    public String processOrder(@Valid @ModelAttribute("order") Order order, Errors errors) {
         if (errors.hasErrors()) {
             return "order";
         }
