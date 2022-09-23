@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.rsreu.alexanastasyev.java_labs.model.Course;
 import ru.rsreu.alexanastasyev.java_labs.model.Order;
-import ru.rsreu.alexanastasyev.java_labs.repository.course.CourseRepository;
-import ru.rsreu.alexanastasyev.java_labs.repository.order.OrderRepository;
+import ru.rsreu.alexanastasyev.java_labs.repository.CourseRepository;
+import ru.rsreu.alexanastasyev.java_labs.repository.OrderRepository;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -39,7 +39,7 @@ public class OrderController {
 
     @GetMapping
     public String showOrderForm(Model model) {
-        model.addAttribute("order", new Order());
+        model.addAttribute("order", (new Order()));
         return "order";
     }
 
