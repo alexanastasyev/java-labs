@@ -1,5 +1,7 @@
 package ru.rsreu.alexanastasyev.java_labs.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import ru.rsreu.alexanastasyev.java_labs.model.Course;
 import ru.rsreu.alexanastasyev.java_labs.model.Order;
 import ru.rsreu.alexanastasyev.java_labs.repository.CourseRepository;
 import ru.rsreu.alexanastasyev.java_labs.repository.OrderRepository;
+import ru.rsreu.alexanastasyev.java_labs.util.logger.Logger;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -24,11 +27,15 @@ public class OrderController {
 
     private final CourseRepository courseRepository;
     private final OrderRepository orderRepository;
+    private final ObjectMapper objectMapper;
+    private final Logger logger;
 
     @Autowired
-    public OrderController(CourseRepository courseRepository, OrderRepository orderRepository) {
+    public OrderController(CourseRepository courseRepository, OrderRepository orderRepository, ObjectMapper objectMapper, Logger logger) {
         this.courseRepository = courseRepository;
         this.orderRepository = orderRepository;
+        this.objectMapper = objectMapper;
+        this.logger = logger;
     }
 
     @ModelAttribute
@@ -39,16 +46,25 @@ public class OrderController {
 
     @GetMapping
     public String showOrderForm(Model model) {
+        logger.info("Showing order page");
         model.addAttribute("order", (new Order()));
         return "order";
     }
 
     @PostMapping
     public String processOrder(@Valid @ModelAttribute("order") Order order, Errors errors) {
+        try {
+            logger.info("Creating order : " + objectMapper.writeValueAsString(order));
+        } catch (JsonProcessingException e) {
+        }
+
         if (errors.hasErrors()) {
+            logger.warn("Order creating failed");
             return "order";
         }
+
         orderRepository.save(order);
+        logger.info("Order created successfully");
         return "redirect:/";
     }
 
