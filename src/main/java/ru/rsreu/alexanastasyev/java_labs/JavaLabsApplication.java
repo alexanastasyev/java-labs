@@ -18,17 +18,17 @@ public class JavaLabsApplication {
     @Bean
     CommandLineRunner run(CourseRepository courseRepository) {
         return args -> {
-            courseRepository.save(new Course(-1, "English basics", Language.ENGLISH));
-            courseRepository.save(new Course(-1, "English grammar", Language.ENGLISH));
-            courseRepository.save(new Course(-1, "English vocabulary", Language.ENGLISH));
+            courseRepository.save(new Course("English basics", Language.ENGLISH));
+            courseRepository.save(new Course("English grammar", Language.ENGLISH));
+            courseRepository.save(new Course("English vocabulary", Language.ENGLISH));
 
-            courseRepository.save(new Course(-1, "German basics", Language.GERMAN));
-            courseRepository.save(new Course(-1, "German grammar", Language.GERMAN));
-            courseRepository.save(new Course(-1, "German vocabulary", Language.GERMAN));
+            courseRepository.save(new Course("German basics", Language.GERMAN));
+            courseRepository.save(new Course("German grammar", Language.GERMAN));
+            courseRepository.save(new Course("German vocabulary", Language.GERMAN));
 
-            courseRepository.save(new Course(-1, "French basics", Language.FRENCH));
-            courseRepository.save(new Course(-1, "French grammar", Language.FRENCH));
-            courseRepository.save(new Course(-1, "French vocabulary", Language.FRENCH));
+            courseRepository.save(new Course("French basics", Language.FRENCH));
+            courseRepository.save(new Course("French grammar", Language.FRENCH));
+            courseRepository.save(new Course("French vocabulary", Language.FRENCH));
         };
     }
 
