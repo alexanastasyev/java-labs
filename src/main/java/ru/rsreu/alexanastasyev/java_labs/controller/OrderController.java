@@ -2,13 +2,11 @@ package ru.rsreu.alexanastasyev.java_labs.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.rsreu.alexanastasyev.java_labs.model.Course;
 import ru.rsreu.alexanastasyev.java_labs.model.Order;
 import ru.rsreu.alexanastasyev.java_labs.repository.CourseRepository;
@@ -18,7 +16,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
-@Controller
+@RestController
 @RequestMapping("/order")
 public class OrderController {
 
@@ -31,25 +29,18 @@ public class OrderController {
         this.orderRepository = orderRepository;
     }
 
-    @ModelAttribute
-    public void addCoursesToModel(Model model) {
-        List<Course> courses = courseRepository.findAll();
-        model.addAttribute("courses", courses);
-    }
-
     @GetMapping
-    public String showOrderForm(Model model) {
-        model.addAttribute("order", (new Order()));
-        return "order";
+    public ResponseEntity<List<Order>> getOrders() {
+        return ResponseEntity.ok(orderRepository.findAll());
     }
 
     @PostMapping
-    public String processOrder(@Valid @ModelAttribute("order") Order order, Errors errors) {
+    public ResponseEntity<Order> processOrder(@Valid @RequestBody Order order, Errors errors) {
         if (errors.hasErrors()) {
-            return "order";
+            return ResponseEntity.badRequest().body(null);
         }
-        orderRepository.save(order);
-        return "redirect:/";
+        Order savedOrder = orderRepository.save(order);
+        return ResponseEntity.ok(savedOrder);
     }
 
 }
