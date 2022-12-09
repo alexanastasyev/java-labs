@@ -4,11 +4,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import ru.rsreu.alexanastasyev.java_labs.model.Course;
 import ru.rsreu.alexanastasyev.java_labs.model.Language;
 import ru.rsreu.alexanastasyev.java_labs.repository.CourseRepository;
 
 @SpringBootApplication
+@EnableAuthorizationServer
+@EnableResourceServer
 public class JavaLabsApplication {
 
     public static void main(String[] args) {
